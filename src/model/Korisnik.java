@@ -1,10 +1,11 @@
 package model;
 
 public class Korisnik {
+	public enum Role {USER, ADMIN};
 	private String id;
 	private String pass;
 	private String datum;
-	private boolean role;
+	private Role role;
 	public String getId() {
 		return id;
 	}
@@ -23,13 +24,13 @@ public class Korisnik {
 	public void setDatum(String datum) {
 		this.datum = datum;
 	}
-	public boolean isRole() {
+	public Role getRole() {
 		return role;
 	}
-	public void setRole(boolean role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
-	public Korisnik(String id, String pass, String datum, boolean role) {
+	public Korisnik(String id, String pass, String datum, Role role) {
 		super();
 		this.id = id;
 		this.pass = pass;

@@ -3,7 +3,7 @@ package model;
 public class Film {
 	
 	private String id;
-	private String Naziv;
+	private String naziv;
 	private String reziser;
 	private String glumci;
 	private String zanrovi;
@@ -18,14 +18,14 @@ public class Film {
 			String zemljaPorekla, int godina, String opis) {
 		super();
 		this.id = id;
-		Naziv = naziv;
+		this.naziv = naziv;
 		this.reziser = reziser;
 		this.glumci = glumci;
 		this.zanrovi = zanrovi;
 		this.trajanje = trajanje;
 		this.distribuer = distribuer;
-		ZemljaPorekla = zemljaPorekla;
-		Godina = godina;
+		this.ZemljaPorekla = zemljaPorekla;
+		this.Godina = godina;
 		this.opis = opis;
 	}
 	public String getId() {
@@ -35,10 +35,10 @@ public class Film {
 		this.id = id;
 	}
 	public String getNaziv() {
-		return Naziv;
+		return naziv;
 	}
 	public void setNaziv(String naziv) {
-		Naziv = naziv;
+		this.naziv = naziv;
 	}
 	public String getReziser() {
 		return reziser;
