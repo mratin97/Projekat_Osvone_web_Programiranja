@@ -28,9 +28,9 @@ public class FilmDAO {
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
-				int index = 1;
-				 
-		         String naziv = rset.getString(index++);
+				 int index = 1;
+				 id = rset.getString(index++);
+				 String naziv = rset.getString(index++);
 		         String reziser = rset.getString(index++);
 		         String glumci = rset.getString(index++);
 		         String zanrovi = rset.getString(index++);
@@ -39,9 +39,9 @@ public class FilmDAO {
 		         String zemlja = rset.getString(index++);
 		         int godina = rset.getInt(index++);
 		         String opis = rset.getString(index++);
+
 		         Film film=new Film(id, naziv, reziser, glumci, zanrovi, trajanje, distributer , zemlja, godina, opis);
 		         return film;
-
 			}
 		} finally {
 			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
@@ -78,7 +78,7 @@ public class FilmDAO {
 			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
 			}
 	}
-	public static List<Film> getAll(String name, double lowPrice, double highPrice) throws Exception {
+	public static List<Film> getAll() throws Exception {
 		List<Film> filmovi = new ArrayList<>();
 
 		Connection conn = ConnectionManager.getConnection();
@@ -86,18 +86,16 @@ public class FilmDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			String query = "SELECT * FROM filmovi WHERE "
-					+ "name LIKE ? ";
-
+			String query = "SELECT * FROM filmovi";
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
-			pstmt.setString(index++, "%" + name + "%");
+			
 			System.out.println(pstmt);
 
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
-				index = 0;
+				index = 1;
 				 String id = rset.getString(index++);
 				 String naziv = rset.getString(index++);
 		         String reziser = rset.getString(index++);

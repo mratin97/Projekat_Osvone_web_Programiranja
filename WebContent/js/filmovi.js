@@ -13,12 +13,7 @@ $(document).ready(function() {
 		return false;
 	});
 
-		var naziv =$('#naziv');
-		var filmovi = lowPriceFilterInput.val();
-		var zanr = highPriceFilterInput.val();
-		console.log('nameFilter: ' + nameFilter);
-		console.log('lowPriceFilter: ' + lowPriceFilter);
-		console.log('highPriceFilter: ' + highPriceFilter);
+		
 
 		var params = {
 				
@@ -32,22 +27,29 @@ $(document).ready(function() {
 			}
 			
 			if (data.status == 'success') {
-				
 
 				var filmovi = data.filmovi;
 				for (film in filmovi) {
-					FilmoviTable.append(
+					var rows = 
 						'<tr>' + 
-							'<td><a href="Film.html?id=' + filmovi[film].id + '">' + filmov[film].naziv + '</a></td>' + 
-							'<td>' + filteredProducts[it].price + '</td>' + 
-							'<td>' + +'</td>' + 
-							//TREBA DA SE UBACE PARAMETRI DA ISPISE STAVKE U TABELU
-						'</tr>'
-					)
+						'<td><a href="Film.html?id=' + filmovi[film].id + '">' + filmovi[film].naziv + '</a></td>' + 
+						'<td>' + filmovi[film].reziser  +'</td>' +
+						'<td>' + filmovi[film].glumci + '</td>' + 
+						'<td>' + filmovi[film].zanrovi + '</td>' + 
+						'<td>' + filmovi[film].trajanje + '</td>' + 
+						'<td>' + filmovi[film].distribuer + '</td>' + 
+						'<td>' + filmovi[film].opis + '</td>' + 
+					'</tr>'
+					;
+
+						const table = document.getElementById('FilmoviTable');
+						table.insertAdjacentHTML('beforeend', rows);
+					
 				}
 			}
+			
 		});
-	
+		
 
 	
 });

@@ -16,6 +16,8 @@ import org.apache.catalina.Session;
 
 import dao.FilmDAO;
 import model.Film;
+import dao.UserDAO;
+import model.Korisnik;
 
 
 /**
@@ -37,6 +39,18 @@ public class FilmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String loggedInUserName = (String) request.getSession().getAttribute("loggedInUserName");
+		if (loggedInUserName == null) {
+
+			request.getRequestDispatcher("./LogoutServlet").forward(request, response);
+			return;
+		}
+		try {
+			Korisnik loggedInUser = UserDAO.get(loggedInUserName);
+			if (loggedInUser == null) {
+				request.getRequestDispatcher("./LogoutServlet").forward(request, response);
+				return;
+			}
 				String id = request.getParameter("id");
 				Map<String, Object> data = new LinkedHashMap<>();
 				try {
@@ -46,6 +60,8 @@ public class FilmServlet extends HttpServlet {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}} catch (Exception ex) {
+					ex.printStackTrace();
 				}
 				
 				
