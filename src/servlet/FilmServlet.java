@@ -18,6 +18,7 @@ import dao.FilmDAO;
 import model.Film;
 import dao.UserDAO;
 import model.Korisnik;
+import model.Korisnik.Role;;
 
 
 /**
@@ -73,6 +74,24 @@ public class FilmServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String loggedInUserName = (String) request.getSession().getAttribute("loggedInUserName");
+		if (loggedInUserName == null) {
+
+			request.getRequestDispatcher("./LogoutServlet").forward(request, response);
+			return;
+		}
+		try {
+			Korisnik loggedInUser = UserDAO.get(loggedInUserName);
+			if (loggedInUser == null) {
+				request.getRequestDispatcher("./LogoutServlet").forward(request, response);
+				return;
+			}
+			if (loggedInUser.getRole() != Role.ADMIN) {
+
+				request.getRequestDispatcher("./UnauthorizedServlet").forward(request, response);
+				return;
+			}
+
 		
 		String action = request.getParameter("action");
 		
@@ -81,17 +100,17 @@ public class FilmServlet extends HttpServlet {
 				String naziv = request.getParameter("naziv");
 				naziv = (!"".equals(naziv)? naziv: "<prazan naziv>");
 				String reziser = request.getParameter("reziser");
-				reziser = (!"".equals(reziser)? naziv: "<prazan reziser>");
+				reziser = (!"".equals(reziser)? reziser: "<prazan reziser>");
 				String glumci = request.getParameter("glumci");
-				glumci = (!"".equals(glumci)? naziv: "<prazan glumci>");
+				glumci = (!"".equals(glumci)? glumci: "<prazan glumci>");
 				String zanr = request.getParameter("zanr");
-				zanr = (!"".equals(zanr)? naziv: "<prazan zanr>");
+				zanr = (!"".equals(zanr)? zanr: "<prazan zanr>");
 				String distributer = request.getParameter("distributer");
-				distributer = (!"".equals(distributer)? naziv: "<prazan distributer>");
+				distributer = (!"".equals(distributer)? distributer: "<prazan distributer>");
 				String zemlja = request.getParameter("zemlja");
-				zemlja = (!"".equals(zemlja)? naziv: "<prazan zemlja>");
+				zemlja = (!"".equals(zemlja)? zemlja: "<prazan zemlja>");
 				String opis = request.getParameter("opis");
-				opis = (!"".equals(reziser)? naziv: "<prazan opis>");
+				opis = (!"".equals(opis)? opis: "<prazan opis>");
 				int trajanje = Integer.parseInt(request.getParameter("trajanje"));
 				trajanje = (trajanje > 0? trajanje: 3000);
 				int godina = Integer.parseInt(request.getParameter("godina"));
@@ -111,4 +130,9 @@ public class FilmServlet extends HttpServlet {
 			
 	}
 
+		request.getRequestDispatcher("./SuccessServlet").forward(request, response);
+	} catch (Exception ex) {
+		ex.printStackTrace();
+		request.getRequestDispatcher("./FailureServlet").forward(request, response);
+	}
 	}}

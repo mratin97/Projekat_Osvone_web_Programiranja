@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Film;
-
 import dao.ConnectionManager;
 
 
@@ -56,11 +55,12 @@ public class FilmDAO {
 
 		PreparedStatement pstmt = null;
 		try {
-			String query = "INSERT INTO filmovi (naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godina, opis) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO filmovi (id, naziv, reziser, glumci, zanrovi, trajanje, distributer, zemljaPorekla, godina, opis) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
+			pstmt.setString(index++, film.getId());
 			pstmt.setString(index++, film.getNaziv());
 			pstmt.setString(index++, film.getReziser());
 			pstmt.setString(index++, film.getGlumci());
@@ -119,6 +119,53 @@ public class FilmDAO {
 			}
 		
 		return filmovi;
+	}
+	public static boolean update(Film film) throws Exception {
+		Connection conn = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		try {
+			String query = "UPDATE filmovi SET naziv = ?, reziser = ?, glumci = ?, zanrovi = ?, trajanje = ?, distributer = ?, zemljaPorekla = ?, godina = ?, opis = ?  "
+					+ "WHERE id = ?";
+
+			pstmt = conn.prepareStatement(query);
+			int index = 1;
+		
+			pstmt.setString(index++, film.getNaziv());
+			pstmt.setString(index++, film.getReziser());
+			pstmt.setString(index++, film.getGlumci());
+			pstmt.setString(index++, film.getZanrovi());
+			pstmt.setInt(index++, film.getTrajanje());
+			pstmt.setString(index++, film.getDistribuer());
+			pstmt.setString(index++, film.getZemljaPorekla());
+			pstmt.setInt(index++, film.getGodina());
+			pstmt.setString(index++, film.getOpis());
+			pstmt.setString(index++, film.getId());
+			
+			System.out.println(pstmt);
+
+			return pstmt.executeUpdate() == 1;
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();}
+		}
+	}
+	public static boolean delete(String id) throws Exception {
+		Connection conn = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		try {
+			String query = "DELETE FROM filmovi WHERE id = ?";
+
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			System.out.println(pstmt);
+
+			return pstmt.executeUpdate() == 1;
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+		}
 	}
     }
     
