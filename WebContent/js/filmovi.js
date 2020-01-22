@@ -12,11 +12,14 @@ $(document).ready(function() {
 		event.preventDefault();
 		return false;
 	});
+	var nameFilterInput = $('#nameFilterInput');
+	function getFilms() {
+	var nameFilter ="%"+nameFilterInput.val();
+	console.log('nameFilter: ' + nameFilter);
 
-		
 
 		var params = {
-				
+				'nameFilter': nameFilter, 
 		};
 		$.get('FilmoviServlet', params, function(data) {
 			console.log(data);
@@ -27,6 +30,9 @@ $(document).ready(function() {
 			}
 			
 			if (data.status == 'success') {
+				$(document).ready(function() {
+					   $("FilmoviTabela").find("tr:gt(1)").remove();
+					});
 
 				var filmovi = data.filmovi;
 				for (film in filmovi) {
@@ -49,7 +55,12 @@ $(document).ready(function() {
 			}
 			
 		});
-		
+	}
 
-	
+		nameFilterInput.on('keyup', function(event) {
+			getFilms();
+
+			event.preventDefault();
+			return false;
+		});
 });

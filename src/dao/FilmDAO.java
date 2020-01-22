@@ -78,7 +78,7 @@ public class FilmDAO {
 			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
 			}
 	}
-	public static List<Film> getAll() throws Exception {
+	public static List<Film> getAll(String name) throws Exception {
 		List<Film> filmovi = new ArrayList<>();
 
 		Connection conn = ConnectionManager.getConnection();
@@ -86,9 +86,11 @@ public class FilmDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			String query = "SELECT * FROM filmovi";
+			String query = "SELECT * FROM filmovi WHERE naziv LIKE ?";
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
+			name="%"+name+"%";
+			pstmt.setString(index++, name);
 			
 			System.out.println(pstmt);
 

@@ -35,6 +35,7 @@ public class FilmoviServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String loggedInUserName = (String) request.getSession().getAttribute("loggedInUserName");
+		
 		if (loggedInUserName == null) {
 
 			request.getRequestDispatcher("./LogoutServlet").forward(request, response);
@@ -47,7 +48,9 @@ public class FilmoviServlet extends HttpServlet {
 				return;
 			}} catch (Exception ex) {}
 		try {
-			List<Film> filmovi = FilmDAO.getAll();
+			String name = request.getParameter("nameFilter");
+			name = (name != null? name: "%");
+			List<Film> filmovi = FilmDAO.getAll(name);
 			Map<String, Object> data = new LinkedHashMap<>();
 			data.put("filmovi", filmovi);
 
