@@ -53,7 +53,7 @@ $(document).ready(function() {
 					glumciInput.val(filmovi[film].glumci);
 					zanrInput.val(filmovi[film].zanrovi);
 					trajanjeInput.val(filmovi[film].trajanje);
-					distributerInput.val(filmovi[film].distributer);
+					distributerInput.val(filmovi[film].distribuer);
 					zemljaInput.val(filmovi[film].zemljaPorekla);
 					godinaInput.val(filmovi[film].godina);
 					opisInput.val(filmovi[film].opis);
