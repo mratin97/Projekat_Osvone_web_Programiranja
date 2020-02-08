@@ -60,7 +60,8 @@ public class UserDAO {
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
-				int index = 1;
+				int index = 2;
+				
 				String password = rset.getString(index++);
 				
 				Role role = Role.valueOf(rset.getString(index++));

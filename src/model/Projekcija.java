@@ -6,11 +6,20 @@ public class Projekcija {
 	
 	public String id;
 	public String idFilma;
-	public TipProjekcije tip;
-	public Sala sala;
-	public Date datum;
+	public String tip;
+	public String sala;
+	public String datum;
+	public String vreme;
 	public int cena;
+	public String getVreme() {
+		return vreme;
+	}
+	public void setVreme(String vreme) {
+		this.vreme = vreme;
+	}
 	public String adminId;
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -23,22 +32,22 @@ public class Projekcija {
 	public void setIdFilma(String idFilma) {
 		this.idFilma = idFilma;
 	}
-	public TipProjekcije getTip() {
+	public String getTip() {
 		return tip;
 	}
-	public void setTip(TipProjekcije tip) {
+	public void setTip(String tip) {
 		this.tip = tip;
 	}
-	public Sala getSala() {
+	public String getSala() {
 		return sala;
 	}
-	public void setSala(Sala sala) {
+	public void setSala(String sala) {
 		this.sala = sala;
 	}
-	public Date getDatum() {
+	public String getDatum() {
 		return datum;
 	}
-	public void setDatum(Date datum) {
+	public void setDatum(String datum) {
 		this.datum = datum;
 	}
 	public int getCena() {
@@ -53,5 +62,19 @@ public class Projekcija {
 	public void setAdminId(String adminId) {
 		this.adminId = adminId;
 	}
+
+	public Projekcija(String id, String idFilma, String tip, String sala, String datum, String vreme, int cena,
+			String adminId) {
+		super();
+		this.id = id;
+		this.idFilma = idFilma;
+		this.tip = tip;
+		this.sala = sala;
+		this.datum = datum;
+		this.vreme = vreme;
+		this.cena = cena;
+		this.adminId = adminId;
+	}
+	
 
 }

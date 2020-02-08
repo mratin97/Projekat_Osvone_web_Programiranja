@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Bioskop</title>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script src="js/projekcije.js"></script>
+</head>
+<body>
+	<h3>Projekcije:</h3>
+	<table border="1" id="ProjekcijeTable">
+		<tr bgcolor="lightgrey">
+			<th>Film</th>
+			<th>Datum</th>
+			<th>Vreme</th>
+			<th>Tip</th>
+			<th>Sala</th>
+			<th>Cena</th>
+			
+		</tr>
+		<tr bgcolor="lightgrey">
+			<th align="center"><input type="text" id="nameFilterInput"></th>
+			
+			<th><input type="date" id="start" name="trip-start"
+      				 value="08-02-2020"
+       				min="08-02-2020" max="08-03-2020"></th>
+			<th><select id="vremeInput">
+			<option value=" "> </option>
+			<option value="12:30"> 12:30</option>
+			<option value="14:30">14:30</option>
+			<option value="15:00">15:00</option>
+			<option value="18:00">18:00</option>
+			</select></th>
+			<th><select id="tipInput">
+			<option value=" "> </option>
+			<option value="2D">2D</option>
+			<option value="3D">3D</option>
+			<option value="4D">4D</option>
+			</select></th>
+			
+			<th align="center"><input type="submit" value="Name Sort" id="sortSubmit"></th>
+			<td/>
+		</tr>
+		
+	</table>
+	
+
+</body>
+</html>

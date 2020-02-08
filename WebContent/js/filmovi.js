@@ -13,8 +13,7 @@ $(document).ready(function() {
 		return false;
 	});
 	var nameFilterInput = $('#nameFilterInput');
-	function getFilms() {
-		
+	function getFilms() {	
 	var nameFilter =nameFilterInput.val();
 	console.log('nameFilter: ' + nameFilter);
 
