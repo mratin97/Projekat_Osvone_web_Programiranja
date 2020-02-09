@@ -177,7 +177,7 @@ public class ProjekcijaDAO {
 				
 				System.out.println(pstmt);
 
-				return pstmt.executeUpdate() == 1;
+				return pstmt.executeUpdate() ==  1;
 			} finally {
 				try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
 				try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();}
