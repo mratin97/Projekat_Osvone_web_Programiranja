@@ -39,12 +39,12 @@ $(document).ready(function() {
 			
 			if (data.status == 'success') {
 				
-				var projekcije = data.projekcijedanas;
+				var projekcije = data.projekcije;
 				var filmovi = data.filmovi;
 				for (projekcija in projekcije) {
 					const table = document.getElementById('ProjekcijeTable');
 					for (film in filmovi){ if (filmovi[film].naziv== projekcije[projekcija].idFilma){
-					if(tipCheck==projekcije[projekcija].tip || vremeCheck==projekcije[projekcija].vreme){
+					if(tipCheck==projekcije[projekcija].tip /* vremeCheck==projekcije[projekcija].vreme*/){
 					var rows = 
 						'<tr>' + 
 						'<td><a href="Film.html?naziv=' + filmovi[film].id + '">' + projekcije[projekcija].idFilma + '</a></td>' + 
