@@ -45,6 +45,7 @@ $(document).ready(function() {
 						'<td>' + filmovi[film].trajanje + '</td>' + 
 						'<td>' + filmovi[film].distribuer + '</td>' + 
 						'<td>' + filmovi[film].opis + '</td>' + 
+						'<td><a href="Karta.html?id=' + filmovi[film].naziv + '">' + "kupi kartu"+ '</a></td>' + 
 					'</tr>'
 					;
 
@@ -56,7 +57,7 @@ $(document).ready(function() {
 			
 		});
 	}
-
+	getFilms();
 		nameFilterInput.on('keyup', function(event) {
 			$('#FilmoviTable').find('tr:gt(1)').remove();
 			getFilms();

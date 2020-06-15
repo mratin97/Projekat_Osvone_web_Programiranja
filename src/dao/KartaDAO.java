@@ -44,5 +44,28 @@ public class KartaDAO {
 		
 		return null;
 	}
-	
+	public static boolean add(Karta karta) throws Exception {
+		Connection conn = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		try {
+			String query = "INSERT INTO filmovi (id, projekcija, sediste, datum, user) "
+					+ "VALUES (?, ?, ?, ?, ?)";
+
+			pstmt = conn.prepareStatement(query);
+			int index = 1;
+			pstmt.setString(index++, karta.getId());
+			pstmt.setString(index++, karta.getProjekcija());
+			pstmt.setString(index++, karta.getSediste());
+			pstmt.setString(index++, karta.getDatum());
+			pstmt.setString(index++, karta.getKorisnik());
+			
+			System.out.println(pstmt);
+
+			return pstmt.executeUpdate() == 1;
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+			}
+	}
 }
