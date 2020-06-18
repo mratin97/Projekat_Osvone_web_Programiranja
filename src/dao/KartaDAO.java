@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Karta;
+import model.Projekcija;
 import dao.ConnectionManager;
 public class KartaDAO {
 
@@ -33,8 +34,8 @@ public class KartaDAO {
 				 String datum = rset.getString(index++);
 				 String user = rset.getString(index++);
 
-		         Karta sala= new Karta(id,projekcija,sediste,datum,user);
-		         return sala;
+		         Karta karta= new Karta(id,projekcija,sediste,datum,user);
+		         return karta;
 			}
 		} finally {
 			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
@@ -49,9 +50,9 @@ public class KartaDAO {
 
 		PreparedStatement pstmt = null;
 		try {
-			String query = "INSERT INTO filmovi (id, projekcija, sediste, datum, user) "
+			String query = "INSERT INTO karta (id, projekcija, sediste, datum, user) "
 					+ "VALUES (?, ?, ?, ?, ?)";
-
+			
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
 			pstmt.setString(index++, karta.getId());
@@ -67,5 +68,43 @@ public class KartaDAO {
 			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
 			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
 			}
+	}
+	public static List<Karta> getAll(String name) throws Exception {
+		List<Karta> karte = new ArrayList<>();
+
+		Connection conn = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			String query = "SELECT * FROM karta WHERE projekcija LIKE ?";
+			pstmt = conn.prepareStatement(query);
+			int index = 1;
+			name="%"+name+"%";
+			pstmt.setString(index++, name);
+			
+			System.out.println(pstmt);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				index = 1;
+				 String id = rset.getString(index++);
+				 String projekcija = rset.getString(index++);
+				 String sediste = rset.getString(index++);
+				 String datum = rset.getString(index++);
+				 String user = rset.getString(index++);
+
+		         Karta karta= new Karta(id,projekcija,sediste,datum,user);
+		        
+		         karte.add(karta);
+			}
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+			}
+		
+		return karte;
 	}
 }

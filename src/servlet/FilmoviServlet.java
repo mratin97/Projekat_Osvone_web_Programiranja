@@ -81,7 +81,7 @@ public class FilmoviServlet extends HttpServlet {
 			return;
 		}
 		try {
-			/*Korisnik loggedInUser = UserDAO.get(loggedInUserName);
+			Korisnik loggedInUser = UserDAO.get(loggedInUserName);
 			if (loggedInUser == null) {
 				request.getRequestDispatcher("./LogoutServlet").forward(request, response);
 				return;
@@ -90,8 +90,7 @@ public class FilmoviServlet extends HttpServlet {
 
 				request.getRequestDispatcher("./UnauthorizedServlet").forward(request, response);
 				return;
-			}*/
-
+			}
 		
 		String action = request.getParameter("action");
 		

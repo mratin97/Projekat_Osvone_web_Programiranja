@@ -63,9 +63,9 @@ $(document).ready(function() {
 				}else if((tipCheck==" " && vremeCheck==" " ) ){
 					var rows = 
 						'<tr>' + 
-						'<td><a href="Film.html?naziv=' + filmovi[film].id + '">' + projekcije[projekcija].idFilma + '</a></td>' + 
+						'<td><a href="Projekcija.html?naziv=' + filmovi[film].id + '">' + projekcije[projekcija].idFilma + '</a></td>' + 
 						'<td>' + projekcije[projekcija].datum  +'</td>' +
-						'<td>' + projekcije[projekcija].vreme  +'</td>' +
+						'<td><a href="Projekcija.html?id=' + projekcije[projekcija].id + '">'+ projekcije[projekcija].vreme  +'</td>' +
 						'<td>' + projekcije[projekcija].tip + '</td>' + 
 						'<td>' + projekcije[projekcija].sala + '</td>' + 
 						'<td>' + projekcije[projekcija].cena + '</td>' + 

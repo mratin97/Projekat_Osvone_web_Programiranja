@@ -92,4 +92,14 @@
     <servlet-name>ProjekcijeServlet</servlet-name>
     <url-pattern>/ProjekcijeServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>KartaServlet</display-name>
+    <servlet-name>KartaServlet</servlet-name>
+    <servlet-class>servlet.KartaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>KartaServlet</servlet-name>
+    <url-pattern>/KartaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

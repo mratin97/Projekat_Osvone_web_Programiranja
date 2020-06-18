@@ -115,6 +115,46 @@ public class ProjekcijaDAO {
 			
 			return projekcije;
 		}
+		public static List<Projekcija> getAllbyId(String name) throws Exception {
+			List<Projekcija> projekcije = new ArrayList<>();
+
+			Connection conn = ConnectionManager.getConnection();
+
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			try {
+				String query = "SELECT * FROM projekcija WHERE id LIKE ?";
+				pstmt = conn.prepareStatement(query);
+				int index = 1;
+				name="%"+name+"%";
+				pstmt.setString(index++, name);
+				
+				System.out.println(pstmt);
+
+				rset = pstmt.executeQuery();
+
+				while (rset.next()) {
+					index = 1;
+					 String id = rset.getString(index++);
+					 String idFilma = rset.getString(index++);
+			         String tip = rset.getString(index++);
+			         String sala = rset.getString(index++);
+			         String datum = rset.getString(index++);
+			         String vreme = rset.getString(index++);
+			         int cena = rset.getInt(index++);
+			         String adminId = rset.getString(index++);
+
+			         Projekcija projekcija=new Projekcija(id,idFilma,tip,sala,datum,vreme,cena,adminId);
+			         projekcije.add(projekcija);
+				}
+			} finally {
+				try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+				try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
+				try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+				}
+			
+			return projekcije;
+		}
 		public static List<Projekcija> getAllDanas(String datum) throws Exception {
 			List<Projekcija> projekcije = new ArrayList<>();
 
