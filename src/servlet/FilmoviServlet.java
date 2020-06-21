@@ -60,7 +60,9 @@ public class FilmoviServlet extends HttpServlet {
 			List<Film> filmovi = FilmDAO.getAll(name);
 			Map<String, Object> data = new LinkedHashMap<>();
 			data.put("filmovi", filmovi);
-
+			Korisnik loggedInUser = UserDAO.get(loggedInUserName);
+			data.put("loggedInUserRole", loggedInUser.getRole());
+			data.put("loggedInUserName", loggedInUser.getId());
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 		} catch (Exception e) {

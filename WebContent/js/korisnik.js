@@ -51,8 +51,9 @@ $(document).ready(function() {
 						
 					
 				}
+					
 			}
-			
+				$('#Upd').append('<a href="UserUpd.html?id='+id+' ">Korisnik</a>');
 			}});
 		
 

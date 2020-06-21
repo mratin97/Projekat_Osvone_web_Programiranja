@@ -102,4 +102,24 @@
     <servlet-name>KartaServlet</servlet-name>
     <url-pattern>/KartaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserUpdServlet</display-name>
+    <servlet-name>UserUpdServlet</servlet-name>
+    <servlet-class>servlet.UserUpdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserUpdServlet</servlet-name>
+    <url-pattern>/UserUpdServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>KartaPregledServlet</display-name>
+    <servlet-name>KartaPregledServlet</servlet-name>
+    <servlet-class>servlet.KartaPregledServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>KartaPregledServlet</servlet-name>
+    <url-pattern>/KartaPregledServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

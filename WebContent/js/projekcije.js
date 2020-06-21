@@ -81,7 +81,7 @@ $(document).ready(function() {
 			}}
 		});
 	}
-
+	getProjekcije();
 		nameFilterInput.on('keyup', function(event) {
 			$('#ProjekcijeTable').find('tr:gt(1)').remove();
 			getProjekcije();

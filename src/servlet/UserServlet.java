@@ -78,6 +78,29 @@ public class UserServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+		/*String action = request.getParameter("action");
+		
+			if(action=="update") {
+			
+				String id = request.getParameter("id");
+				Korisnik user;
+				try {
+					user = UserDAO.get(id);
+					String pass=request.getParameter("pass");
+					String role=request.getParameter("role");
+					
+					user.setId(id);
+					user.setPass(pass);
+					UserDAO.update(user);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}*/
+				
+				
+			
+		
 
-}
+
+}}

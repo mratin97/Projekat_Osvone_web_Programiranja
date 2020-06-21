@@ -107,4 +107,42 @@ public class KartaDAO {
 		
 		return karte;
 	}
+	public static List<Karta> getAllbyKorisnik(String name) throws Exception {
+		List<Karta> karte = new ArrayList<>();
+
+		Connection conn = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			String query = "SELECT * FROM karta WHERE user LIKE ?";
+			pstmt = conn.prepareStatement(query);
+			int index = 1;
+			name="%"+name+"%";
+			pstmt.setString(index++, name);
+			
+			System.out.println(pstmt);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				index = 1;
+				 String id = rset.getString(index++);
+				 String projekcija = rset.getString(index++);
+				 String sediste = rset.getString(index++);
+				 String datum = rset.getString(index++);
+				 String user = rset.getString(index++);
+
+		         Karta karta= new Karta(id,projekcija,sediste,datum,user);
+		        
+		         karte.add(karta);
+			}
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+			}
+		
+		return karte;
+	}
 }

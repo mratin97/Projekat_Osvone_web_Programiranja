@@ -55,7 +55,7 @@ $(document).ready(function() {
 			
 		});
 	}
-
+	getUsers();
 		nameFilterInput.on('keyup', function(event) {
 			$('#userTable').find('tr:gt(1)').remove();
 			getUsers();

@@ -60,12 +60,12 @@ public class UserDAO {
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
-				int index = 2;
+				int index = 1;
 				
 				String password = rset.getString(index++);
 				
 				Role role = Role.valueOf(rset.getString(index++));
-				String datum=rset.getString(index++);
+				String datum="1/20/2020";
 				
 
 				return new Korisnik(userName, password,datum, role);
@@ -137,5 +137,31 @@ public class UserDAO {
 			}
 		
 		return korisnici;
+	}
+	public static boolean update(Korisnik user,String name) throws Exception {
+		Connection conn = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		try {
+			String query = "UPDATE users SET userName=?, password=?, role=?, date=? WHERE userName = ?";
+
+			pstmt = conn.prepareStatement(query);
+			int index = 1;
+		
+		
+			pstmt.setString(index++, user.getId());
+			pstmt.setString(index++, user.getPass());
+			pstmt.setString(index++, user.getRole().toString());
+			pstmt.setString(index++, user.getDatum());
+			pstmt.setString(index++, name);
+			System.out.println(pstmt);
+			
+			System.out.println(query);
+
+			return pstmt.executeUpdate() == 1;
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();}
+		}
 	}
 }

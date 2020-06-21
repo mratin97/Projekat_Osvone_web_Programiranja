@@ -53,6 +53,17 @@ $(document).ready(function() {
 						table.insertAdjacentHTML('beforeend', rows);
 					
 				}
+				
+				console.log(data.loggedInUserName);
+				if (data.loggedInUserRole == 'ADMIN') {
+					$('#addFilm').append('<a href="addFilm.html" >Add Film</a>');
+					$('#Korisnici').append('<a href="korisnici.html" >Korisnici</a>');
+					$('#Projekcije').append('<a href="projekcije.html" >projekcije</a>');
+					
+				} else if (data.loggedInUserRole == 'USER') {
+					
+					$('#Korisnik').append('<a href="korisnik.html?id='+data.loggedInUserName+' ">Korisnik</a>');
+				}
 			}
 			
 		});
