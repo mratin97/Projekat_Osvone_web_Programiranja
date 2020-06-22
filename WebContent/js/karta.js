@@ -49,7 +49,7 @@ $(document).ready(function() {
 					if(tipCheck==projekcije[projekcija].tip && projekcije[projekcija].idFilma==naziv /* vremeCheck==projekcije[projekcija].vreme*/){
 					var rows = 
 						'<tr>' + 
-						'<td><a href="KupiKartu.html?naziv=' + projekcije[projekcija].idFilma + '">' + projekcije[projekcija].idFilma + '</a></td>' + 
+						'<td><a href="KupiKartu.html?naziv=' + projekcije[projekcija].id + '">' + projekcije[projekcija].idFilma + '</a></td>' + 
 						'<td>' + projekcije[projekcija].datum  +'</td>' +
 						'<td><a href="Projekcija.html?id=' + projekcije[projekcija].id + '">'+ projekcije[projekcija].vreme  +'</td>' +
 						'<td>' + projekcije[projekcija].tip + '</td>' + 

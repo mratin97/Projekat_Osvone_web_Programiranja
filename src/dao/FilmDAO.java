@@ -86,10 +86,13 @@ public class FilmDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			String query = "SELECT * FROM filmovi WHERE naziv LIKE ?";
+			String query = "SELECT * FROM filmovi WHERE naziv LIKE ? or distributer LIKE?  or zanrovi LIKE?  or zemljaPorekla LIKE?";
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
 			name="%"+name+"%";
+			pstmt.setString(index++, name);
+			pstmt.setString(index++, name);
+			pstmt.setString(index++, name);
 			pstmt.setString(index++, name);
 			
 			System.out.println(pstmt);

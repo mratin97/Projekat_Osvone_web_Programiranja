@@ -195,6 +195,34 @@ public class ProjekcijaDAO {
 			
 			return projekcije;
 		}
+		public static int count(String name) throws Exception {
+			
+
+			Connection conn = ConnectionManager.getConnection();
+
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			int count;
+			try {
+				String query = "SELECT COUNT(film) FROM projekcija WHERE film= ?";
+				pstmt = conn.prepareStatement(query);
+				int index = 1;
+				name="%"+name+"%";
+				pstmt.setString(index++, name);
+				
+				System.out.println(pstmt);
+
+				rset = pstmt.executeQuery();
+				count = rset.getInt(index++);
+				
+			} finally {
+				try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+				try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
+				try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+				}
+			
+			return count;
+		}
 		public static boolean update(Projekcija projekcija) throws Exception {
 			Connection conn = ConnectionManager.getConnection();
 

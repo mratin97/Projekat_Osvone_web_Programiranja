@@ -122,4 +122,14 @@
     <servlet-name>KartaPregledServlet</servlet-name>
     <url-pattern>/KartaPregledServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>IzvestavanjeServlet</display-name>
+    <servlet-name>IzvestavanjeServlet</servlet-name>
+    <servlet-class>servlet.IzvestavanjeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IzvestavanjeServlet</servlet-name>
+    <url-pattern>/IzvestavanjeServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -15,11 +15,16 @@ $(document).ready(function() {
 	var nameFilterInput = $('#nameFilterInput');
 	var tipInput = $('#tipInput');
 	var vremeInput = $('#vremeInput');
+	var brojac=0;
 	function getProjekcije() {
 		
 	var nameFilter =nameFilterInput.val();
 	var tipCheck = tipInput.val();
 	var vremeCheck = vremeInput.val();
+	var sortInput=$('#sortInput');
+	var sortCheck = sortInput.val();
+	var nazivSort =$('#nazivSort');
+
 	console.log('nameFilter: ' + nameFilter);
 	
 
@@ -31,16 +36,47 @@ $(document).ready(function() {
 		
 		$.get('ProjekcijeServlet', params, function(data) {
 			console.log(data);
-
+			
 			if (data.status == 'unauthenticated') {
 				window.location.replace('Login.html');
 				return;
 			}
 			
 			if (data.status == 'success') {
+				var sortCheck = sortInput.val();
 				
-				var projekcije = data.projekcije;
+				var role=data.loggedInUserRole;
+				if (role=="ADMIN"){var projekcije=data.projekcije}
+				else if(role=="USER"){var projekcije = data.projekcijedanas;}
+				
 				var filmovi = data.filmovi;
+				if(sortCheck=="Film"){
+					projekcije= projekcije.sort((a,b) =>(a.idFilma > b.idFilma) ? 1 : -1)
+					
+				}
+
+				if(sortCheck=="Cena"){
+					projekcije= projekcije.sort((a,b) =>(a.cena > b.cena) ? 1 : -1)
+					
+				}
+				if(sortCheck=="Sala"){
+					projekcije= projekcije.sort((a,b) =>(a.sala > b.sala) ? 1 : -1)
+					
+				}
+				if(nazivSort.prop('checked')){if(sortCheck=="Film"){
+					projekcije= projekcije.sort((a,b) =>(a.idFilma < b.idFilma) ? 1 : -1)
+					
+				}
+
+				if(sortCheck=="Cena"){
+					projekcije= projekcije.sort((a,b) =>(a.cena < b.cena) ? 1 : -1)
+					
+				}
+				if(sortCheck=="Sala"){
+					projekcije= projekcije.sort((a,b) =>(a.sala < b.sala) ? 1 : -1)
+					
+				}}
+				
 				for (projekcija in projekcije) {
 					const table = document.getElementById('ProjekcijeTable');
 					for (film in filmovi){ if (filmovi[film].naziv== projekcije[projekcija].idFilma){
@@ -52,7 +88,8 @@ $(document).ready(function() {
 						'<td><a href="Projekcija.html?id=' + projekcije[projekcija].id + '">'+ projekcije[projekcija].vreme  +'</td>' +
 						'<td>' + projekcije[projekcija].tip + '</td>' + 
 						'<td>' + projekcije[projekcija].sala + '</td>' + 
-						'<td>' + projekcije[projekcija].cena + '</td>' + 
+						'<td>' + projekcije[projekcija].cena + '</td>' +
+						'<td><a href="KupiKartu.html?naziv=' + projekcije[projekcija].id+'">'+'Kupi Kartu </td>' +
 			
 					'</tr>'
 					;
@@ -62,13 +99,14 @@ $(document).ready(function() {
 					
 				}else if((tipCheck==" " && vremeCheck==" " ) ){
 					var rows = 
-						'<tr>' + 
-						'<td><a href="Projekcija.html?naziv=' + filmovi[film].id + '">' + projekcije[projekcija].idFilma + '</a></td>' + 
+						'<tr>' +
+						'<td><a href="Film.html?naziv=' + filmovi[film].id + '">' + projekcije[projekcija].idFilma + '</a></td>' + 
 						'<td>' + projekcije[projekcija].datum  +'</td>' +
 						'<td><a href="Projekcija.html?id=' + projekcije[projekcija].id + '">'+ projekcije[projekcija].vreme  +'</td>' +
 						'<td>' + projekcije[projekcija].tip + '</td>' + 
 						'<td>' + projekcije[projekcija].sala + '</td>' + 
 						'<td>' + projekcije[projekcija].cena + '</td>' + 
+						'<td><a href="KupiKartu.html?naziv=' + projekcije[projekcija].id+'">'+'Kupi Kartu </td>' +
 			
 					'</tr>'
 					;
@@ -84,6 +122,7 @@ $(document).ready(function() {
 	getProjekcije();
 		nameFilterInput.on('keyup', function(event) {
 			$('#ProjekcijeTable').find('tr:gt(1)').remove();
+			
 			getProjekcije();
 
 			event.preventDefault();
@@ -104,39 +143,13 @@ $(document).ready(function() {
 			return false;
 		});
 		
+	
 		$('#sortSubmit').on('click', function(event) {
-			 var table, i, x, y; 
-             table = document.getElementById("ProjekcijeTable"); 
-             var switching = true; 
-
-             
-             while (switching) { 
-                 switching = false; 
-                 var rows = table.rows; 
-
-                  
-                 for (i = 1; i < (rows.length - 1); i++) { 
-                     var Switch = false; 
-
-                     
-                     x = rows[i].getElementsByTagName("TD")[1]; 
-                     y = rows[i + 1].getElementsByTagName("TD")[1]; 
-
-                  
-                     if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) 
-                         { 
-
-                          
-                         Switch = true; 
-                         break; 
-                     } 
-                 } 
-                 if (Switch) { 
-                     
-                     rows[i].parentNode.insertBefore(rows[i + 1], rows[i]); 
-                     switching = true; 
-                 } 
-             } 
+			
+			
+			$('#ProjekcijeTable').find('tr:gt(1)').remove();
+			getProjekcije();
+			 
 	});
 		
 });

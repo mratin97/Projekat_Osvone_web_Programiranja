@@ -61,6 +61,8 @@ public class ProjekcijeServlet extends HttpServlet {
 			Map<String, Object> data = new LinkedHashMap<>();
 			data.put("projekcije", projekcije);
 			data.put("projekcijedanas", projekcijedanas);
+			Korisnik loggedInUser = UserDAO.get(loggedInUserName);
+			data.put("loggedInUserRole", loggedInUser.getRole());
 			data.put("datum", datum);
 			data.put("filmovi", filmovi);
 			request.setAttribute("data", data);
@@ -81,7 +83,7 @@ public class ProjekcijeServlet extends HttpServlet {
 			request.getRequestDispatcher("./LogoutServlet").forward(request, response);
 			return;
 		}
-		try {/*
+		try {
 			Korisnik loggedInUser = UserDAO.get(loggedInUserName);
 			if (loggedInUser == null) {
 				request.getRequestDispatcher("./LogoutServlet").forward(request, response);
@@ -91,7 +93,7 @@ public class ProjekcijeServlet extends HttpServlet {
 
 				request.getRequestDispatcher("./UnauthorizedServlet").forward(request, response);
 				return;
-			}*/
+			}
 
 		
 		String action = request.getParameter("action");

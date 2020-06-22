@@ -28,7 +28,7 @@ $(document).ready(function() {
 				'nameFilter': nameFilter, 
 		};
 		
-		$.get('FilmoviServlet', params, function(data) {
+		$.get('IzvestavanjeServlet', params, function(data) {
 			console.log(data);
 
 			if (data.status == 'unauthenticated') {
