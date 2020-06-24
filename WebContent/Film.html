@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h3>Film:</h3>
-		<table>
+		<table id="adminTable">
 			<tr><td align="right">Naziv:</td><td><input type="text" id="nazivInput"/></td></tr>
 			<tr><td align="right">Reziser:</td><td><input type="text" id="reziserInput"/></td></tr>
 			<tr><td align="right">Glumci:</td><td><input type="text" id="glumciInput"/></td></tr>
@@ -20,8 +20,21 @@
 			<tr><td align="right">Opis:</td><td ><input type="text" id="opisInput"/></td></tr>
 			
 		</table>
-		<input type="submit" value="Izmeni" id="updateSubmit">
-		<input type="submit" value="Obrisi" id="deleteSubmit">
-	
+		<table id="userTable">
+			<tr><td align="right">Naziv:</td><td id="naziv"></td></tr>
+			<tr><td align="right">Reziser:</td><td id="reziser"></td></tr>
+			<tr><td align="right">Glumci:</td><td id="glumci"></td></tr>
+			<tr><td align="right">Zanrovi:</td><td id="zanr"></td></tr>
+			<tr><td align="right">Trajanje:</td><td id="trajanje"></td></tr>
+			<tr><td align="right">Distributer:</td><td id="distributer"></td></tr>
+			<tr><td align="right">Zemlja Porekla:</td><td id="zemlja"></td></tr>
+			<tr><td align="right">Godina:</td><td id="godina"></td></tr>
+			<tr><td align="right">Opis:</td><td id="opis"></td></tr>
+			
+		</table>
+		
+		
+			<input type="submit" value="Izmeni" id="updateSubmit">
+			<input type="submit" value="Obrisi" id="deleteSubmit">	
 </body>
 </html>

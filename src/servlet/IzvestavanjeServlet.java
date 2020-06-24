@@ -1,9 +1,13 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,9 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.FilmDAO;
+import dao.KartaDAO;
 import dao.ProjekcijaDAO;
 import dao.UserDAO;
 import model.Film;
+import model.Izvestaj;
 import model.Korisnik;
 import model.Projekcija;
 
@@ -56,8 +62,20 @@ String loggedInUserName = (String) request.getSession().getAttribute("loggedInUs
 			data.put("filmovi", filmovi);
 			Korisnik loggedInUser = UserDAO.get(loggedInUserName);
 			List<Projekcija> projekcije = ProjekcijaDAO.getAll(name);
-			/*for()
-			int count= ProjekcijaDAO.count()*/
+			List<Izvestaj> izvestaji = new ArrayList<Izvestaj>();
+			List<Izvestaj> izvestaji12 = new ArrayList<Izvestaj>();
+			
+			for(Projekcija projekcija : projekcije) {
+				int countP= ProjekcijaDAO.count(projekcija.getIdFilma());
+				int countK= KartaDAO.count(projekcija.getIdFilma());
+				int cena= countK * projekcija.getCena();
+				Izvestaj izvestaj= new Izvestaj(projekcija.getIdFilma(),countP,countK,cena);
+				izvestaji.add(izvestaj);
+				
+				
+			
+			}
+			data.put("izvestaji", izvestaji);
 			data.put("loggedInUserRole", loggedInUser.getRole());
 			data.put("loggedInUserName", loggedInUser.getId());
 			request.setAttribute("data", data);

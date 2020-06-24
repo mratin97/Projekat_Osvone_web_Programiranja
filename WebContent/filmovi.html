@@ -5,10 +5,12 @@
 	<title>Bioskop</title>
 	<script src="js/jquery-3.3.1.js"></script>
 	<script src="js/filmovi.js"></script>
+	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
 	<h3>Filmovi:</h3>
-	<table border="1" id="FilmoviTable">
+	<div class="col-md-8" align="center">
+	<table border="1" id="FilmoviTable" class="table table-bordered"  >
 		<tr bgcolor="lightgrey">
 			<th>Naziv </th>
 			<th>Reziser</th>
@@ -21,7 +23,15 @@
 		</tr>
 		<tr bgcolor="lightgrey">
 			<th align="center"><input type="text" id="nameFilterInput"></th>
-			<th><select name="sortInput" id="sortInput">
+			
+			
+			<th></th>
+			<th></th>
+			<th></th>
+			<td/>
+			<td/>
+			
+			<th  colspan="2"><select name="sortInput" id="sortInput" class="form-control ">
 			<option value="Naziv"> Naziv</option>
 			<option value="Reziser"> Reziser</option>
 			<option value="Glumci">Glumci</option>
@@ -31,25 +41,28 @@
 			
 			
 			</select>
+			<input type="checkbox" id="nazivSort" name="nazivSort" value="check">
+			       
 			▲/▼
-			<input type="checkbox" id="nazivSort" name="nazivSort" value="check"><input type="submit" value="Sort" id="sortSubmit"></th>
+			&nbsp;&nbsp;&nbsp;
+			<input type="submit" value="Sort" id="sortSubmit"
+			class="btn btn-info">
 			
-			<th></th>
-			<th></th>
-			<th></th>
-			<td/>
-			<td/>
-			<td/>
+			</th>
+			
+			
 		</tr>
 		
 	</table>
+	</div>
 	
 	<p id="addFilm"><a href="addFilm.html" >Add Film</a></p>
-	<p><a href="" id="logoutLink">Odjava</a></p>
+	<p><a href=" " id="logoutLink">Odjava</a></p>
 	<p  id="Registracija"><a href="Register.html" id="logoutLink">Registracija</a></p>
 	<p  id="Korisnici"></p>
+	<p><a href="Izvestavanje.html" id="Izvestaj">Izvestaj</a></p>
 	<p  id="Korisnik"></p>
 	<p  id="Projekcije"></p>
-	<p><a href="KartaPregled.html" id="logoutLink">Karte</a></p>
+	<p><a href="KartaPregled.html" id="Karte">Karte</a></p>
 </body>
 </html>

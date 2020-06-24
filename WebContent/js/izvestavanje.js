@@ -38,74 +38,50 @@ $(document).ready(function() {
 			
 			if (data.status == 'success') {
 				console.log(sortCheck);
-				var filmovi = data.filmovi;
-				if(sortCheck=="Naziv"){
-					filmovi= filmovi.sort((a,b) =>(a.naziv > b.naziv) ? 1 : -1)
+				var izvestaji = data.izvestaji;
+				
+				if(sortCheck=="Ukupna zarada"){
+					izvestaji= izvestaji.sort((a,b) =>(a.cena > b.cena) ? 1 : -1)
 					
 				}
 
-				if(sortCheck=="Trajanje"){
-					filmovi= filmovi.sort((a,b) =>(a.trajanje > b.trajanje) ? 1 : -1)
+				if(sortCheck=="Broj Projekcija"){
+					izvestaji= izvestaji.sort((a,b) =>(a.brojP > b.brojP) ? 1 : -1)
 					
 				}
-				if(sortCheck=="Zanrovi"){
-					filmovi= filmovi.sort((a,b) =>(a.zanrovi > b.zanrovi) ? 1 : -1)
+				if(sortCheck=="Broj Karata"){
+					izvestaji= izvestaji.sort((a,b) =>(a.brojK > b.brojK) ? 1 : -1)
 					
 				}
-				if(sortCheck=="Glumci"){
-					filmovi= filmovi.sort((a,b) =>(a.glumci > b.glumci) ? 1 : -1)
-					
-				}
-				if(sortCheck=="Distributer"){
-					filmovi= filmovi.sort((a,b) =>(a.distribuer > b.distribuer) ? 1 : -1)
-					
-				}
-				if(sortCheck=="Reziser"){
-					filmovi= filmovi.sort((a,b) =>(a.reziser > b.reziser) ? 1 : -1)
-					
-				}
+				
 				if(nazivSort.prop('checked')){
-					if(sortCheck=="Naziv"){
-						filmovi= filmovi.sort((a,b) =>(a.naziv < b.naziv) ? 1 : -1)
+					if(sortCheck=="Ukupna zarada"){
+						izvestaji= izvestaji.sort((a,b) =>(a.cena < b.cena) ? 1 : -1)
 						
 					}
 
-					if(sortCheck=="Trajanje"){
-						filmovi= filmovi.sort((a,b) =>(a.trajanje < b.trajanje) ? 1 : -1)
+					if(sortCheck=="Broj Projekcija"){
+						izvestaji= izvestaji.sort((a,b) =>(a.brojP < b.brojP) ? 1 : -1)
 						
 					}
-					if(sortCheck=="Zanrovi"){
-						filmovi= filmovi.sort((a,b) =>(a.zanrovi < b.zanrovi) ? 1 : -1)
+					if(sortCheck=="Broj Karata"){
+						izvestaji= izvestaji.sort((a,b) =>(a.brojK < b.brojK) ? 1 : -1)
 						
 					}
-					if(sortCheck=="Glumci"){
-						filmovi= filmovi.sort((a,b) =>(a.glumci < b.glumci) ? 1 : -1)
-						
-					}
-					if(sortCheck=="Reziser"){
-						filmovi= filmovi.sort((a,b) =>(a.reziser < b.reziser) ? 1 : -1)
-						
-					}
-					if(sortCheck=="Distributer"){
-						filmovi= filmovi.sort((a,b) =>(a.distribuer < b.distribuer) ? 1 : -1)
-						
-					}
+					
 				}
 				
 				
-				for (film in filmovi) {
+				
+				for (izvestaj in izvestaji) {
 					const table = document.getElementById('FilmoviTable');
 					
 					var rows = 
 						'<tr>' + 
-						'<td><a href="Film.html?id=' + filmovi[film].id + '">' + filmovi[film].naziv + '</a></td>' + 
-						'<td>' + filmovi[film].reziser  +'</td>' +
-						'<td>' + filmovi[film].glumci + '</td>' + 
-						'<td>' + filmovi[film].zanrovi + '</td>' + 
-						'<td>' + filmovi[film].trajanje + '</td>' + 
-						'<td>' + filmovi[film].distribuer + '</td>' + 
-						'<td>' + filmovi[film].opis + '</td>' + 
-						'<td><a href="Karta.html?id=' + filmovi[film].naziv + '">' + "kupi kartu"+ '</a></td>' + 
+						'<td><a href="Film.html?id=' + izvestaji[izvestaj].naziv + '">' + izvestaji[izvestaj].naziv + '</a></td>' + 
+						'<td>' + izvestaji[izvestaj].brojP  +'</td>' +
+						'<td>' + izvestaji[izvestaj].brojK + '</td>' + 
+						'<td>' + izvestaji[izvestaj].cena + '</td>' + 
 					'</tr>'
 					;
 

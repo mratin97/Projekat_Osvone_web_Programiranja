@@ -145,4 +145,37 @@ public class KartaDAO {
 		
 		return karte;
 	}
+	public static int count(String name) throws Exception {
+		
+
+		Connection conn = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int count;
+		try {
+			String query = "\r\n" + 
+					"SELECT COUNT(film)\r\n" + 
+					"FROM karta\r\n" + 
+					"INNER JOIN projekcija\r\n" + 
+					"ON karta.projekcija = projekcija.id\r\n" + 
+					"where film like  ?";
+			pstmt = conn.prepareStatement(query);
+			int index = 1;
+			name="%"+name+"%";
+			pstmt.setString(index++, name);
+			
+			System.out.println(pstmt);
+			index=1;
+			rset = pstmt.executeQuery();
+			count = rset.getInt(index++);
+			return count;
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+			}
+		
+		//return count;
+	}
 }

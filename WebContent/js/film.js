@@ -27,7 +27,17 @@ $(document).ready(function() {
 	var godinaInput = $('#godinaInput');	
 	var opisInput = $('#opisInput');	
 	
+	var naziv = $('#naziv');
+	var reziser = $('#reziser');
+	var glumci =$('#glumci');
+	var zanr = $('#zanr');	
+	var trajanje = $('#trajanje');	
+	var distributer = $('#distributer');
+	var zemlja =  $('#zemlja');
+	var godina =  $('#godina');
+	var opis =  $('#opis');
 	
+
 	
 		var params = {
 			
@@ -44,8 +54,11 @@ $(document).ready(function() {
 				
 				var filmovi = data.filmovi;
 				for (film in filmovi) {
+					console.log(data);
 					var id = window.location.search.slice(1).split('&')[0].split('=')[1];
-					
+					if (data.loggedInUserRole == 'ADMIN'){
+					$('#adminTable').show();
+					$('#userTable').hide();
 					var id1=filmovi[film].id;
 					if (id1 == id){	
 					nazivInput.val(filmovi[film].naziv);
@@ -58,7 +71,25 @@ $(document).ready(function() {
 					godinaInput.val(filmovi[film].godina);
 					opisInput.val(filmovi[film].opis);
 					
+					}
+					
 				}
+					else if (data.loggedInUserRole == 'USER'){
+						console.log(data);
+						$('#adminTable').hide();
+						$('#userTable').show();
+						$('#naziv').text(filmovi[film].naziv);
+						$('#reziser').text(filmovi[film].reziser);
+						$('#glumci').text(filmovi[film].glumci);
+						$('#zanr').text(filmovi[film].zanrovi);
+						$('#trajanje').text(filmovi[film].trajanje);
+						$('#distributer').text(filmovi[film].distribuer);
+						$('#zemlja').text(filmovi[film].zemljaPorekla);
+						$('#godina').text(filmovi[film].godina);
+						$('#opis').text(filmovi[film].opis);
+						document.getElementById("updateSubmit").remove();
+						document.getElementById("deleteSubmit").remove();
+					}
 			}
 				$('#updateSubmit').on('click', function(event) {
 					var naziv = nazivInput.val();
