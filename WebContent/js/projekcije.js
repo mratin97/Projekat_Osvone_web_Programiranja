@@ -44,7 +44,17 @@ $(document).ready(function() {
 			
 			if (data.status == 'success') {
 				var sortCheck = sortInput.val();
+				if (data.loggedInUserRole == 'ADMIN') {
+					document.getElementById('addFilm').innerHTML = '<a href="addFilm.html" >Add Film</a>';
+					document.getElementById('Korisnici').innerHTML = '<a href="korisnici.html" >Korisnici</a>';
+					document.getElementById('Projekcije').innerHTML = '<a href="projekcije.html" >projekcije</a>';
 				
+					
+				
+			}else if (data.loggedInUserRole == 'USER') {
+				document.getElementById('Korisnici').innerHTML = '<a href="korisnik.html?id='+data.loggedInUserName+' ">Korisnik</a>';
+			
+			}
 				var role=data.loggedInUserRole;
 				if (role=="ADMIN"){var projekcije=data.projekcije}
 				else if(role=="USER"){var projekcije = data.projekcijedanas;}

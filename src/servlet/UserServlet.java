@@ -54,7 +54,9 @@ public class UserServlet extends HttpServlet {
 					break;
 				}
 			}
-	
+			
+			data.put("loggedInUserRole", loggedInUser.getRole());
+			data.put("loggedInUserName", loggedInUser.getId());
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 		} catch (Exception ex) {

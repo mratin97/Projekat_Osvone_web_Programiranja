@@ -123,7 +123,7 @@ $(document).ready(function() {
 					
 				
 			}else if (data.loggedInUserRole == 'USER') {
-				document.getElementById('Korisnik').innerHTML = '<a href="korisnik.html?id='+data.loggedInUserName+' ">Korisnik</a>';
+				document.getElementById('Korisnici').innerHTML = '<a href="korisnik.html?id='+data.loggedInUserName+' ">Korisnik</a>';
 			
 			}
 			} 

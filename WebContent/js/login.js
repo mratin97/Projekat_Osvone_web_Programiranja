@@ -24,6 +24,17 @@ $(document).ready(function() {
 				return;
 			}
 			if (data.status == 'success') {
+				if (data.loggedInUserRole == 'ADMIN') {
+					document.getElementById('addFilm').innerHTML = '<a href="addFilm.html" >Add Film</a>';
+					document.getElementById('Korisnici').innerHTML = '<a href="korisnici.html" >Korisnici</a>';
+					document.getElementById('Projekcije').innerHTML = '<a href="projekcije.html" >projekcije</a>';
+				
+					
+				
+			}else if (data.loggedInUserRole == 'USER') {
+				document.getElementById('Korisnici').innerHTML = '<a href="korisnik.html?id='+data.loggedInUserName+' ">Korisnik</a>';
+			
+			}
 				window.location.replace('filmovi.html');
 			}
 		});

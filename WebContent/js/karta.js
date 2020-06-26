@@ -40,7 +40,17 @@ $(document).ready(function() {
 			}
 			
 			if (data.status == 'success') {
+				if (data.loggedInUserRole == 'ADMIN') {
+					document.getElementById('addFilm').innerHTML = '<a href="addFilm.html" >Add Film</a>';
+					document.getElementById('Korisnici').innerHTML = '<a href="korisnici.html" >Korisnici</a>';
+					document.getElementById('Projekcije').innerHTML = '<a href="projekcije.html" >projekcije</a>';
 				
+					
+				
+			}else if (data.loggedInUserRole == 'USER') {
+				document.getElementById('Korisnici').innerHTML = '<a href="korisnik.html?id='+data.loggedInUserName+' ">Korisnik</a>';
+			
+			}
 				var projekcije = data.projekcije;
 				var filmovi = data.filmovi;
 				for (projekcija in projekcije) {

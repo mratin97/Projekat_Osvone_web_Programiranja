@@ -33,7 +33,17 @@ $(document).ready(function() {
 			console.log(data);
 
 			
+			if (data.loggedInUserRole == 'ADMIN') {
+				document.getElementById('addFilm').innerHTML = '<a href="addFilm.html" >Add Film</a>';
+				document.getElementById('Korisnici').innerHTML = '<a href="korisnici.html" >Korisnici</a>';
+				document.getElementById('Projekcije').innerHTML = '<a href="projekcije.html" >projekcije</a>';
+			
 				
+			
+		}else if (data.loggedInUserRole == 'USER') {
+			document.getElementById('Korisnici').innerHTML = '<a href="korisnik.html?id='+data.loggedInUserName+' ">Korisnik</a>';
+		
+		}
 				var karte = data.karte;
 				var karte2=data.karte2;
 				if (data.loggedInUserRole == 'USER') {
