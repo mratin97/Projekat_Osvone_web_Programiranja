@@ -115,8 +115,8 @@ public class FilmServlet extends HttpServlet {
 				trajanje = (trajanje > 0? trajanje: 3000);
 				int godina = Integer.parseInt(request.getParameter("godina"));
 				godina = (godina > 0? godina: 3000);
-
-				Film film = new Film("123", naziv, reziser,glumci,zanr,trajanje,distributer,zemlja,godina,opis);
+				String id= request.getParameter("id");
+				Film film = new Film(id, naziv, reziser,glumci,zanr,trajanje,distributer,zemlja,godina,opis);
 				
 				try {
 					FilmDAO.add(film);

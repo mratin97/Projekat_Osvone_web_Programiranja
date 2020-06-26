@@ -55,6 +55,10 @@ $(document).ready(function() {
 				window.location.replace('Login.html');
 				return;
 			}
+			if (data.status == 'failure') {
+				 alert("Pogresan unos");
+				return;
+			}
 
 			if (data.status == 'success') {
 				window.location.replace('filmovi.html');
