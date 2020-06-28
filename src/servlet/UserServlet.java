@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Film;
 import model.Korisnik;
+import model.Korisnik.Role;
 import dao.FilmDAO;
 import dao.UserDAO;
 
@@ -73,6 +74,10 @@ public class UserServlet extends HttpServlet {
 			List<Korisnik> korisnici = UserDAO.getAll(name);
 			Map<String, Object> data = new LinkedHashMap<>();
 			data.put("korisnici", korisnici);
+			String loggedInUserName = (String) request.getSession().getAttribute("loggedInUserName");
+			Korisnik loggedInUser = UserDAO.get(loggedInUserName);
+			data.put("loggedInUserRole", loggedInUser.getRole());
+			data.put("loggedInUserName", loggedInUser.getId());
 
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
@@ -80,7 +85,7 @@ public class UserServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*String action = request.getParameter("action");
+		String action = request.getParameter("action");
 		
 			if(action=="update") {
 			
@@ -90,15 +95,15 @@ public class UserServlet extends HttpServlet {
 					user = UserDAO.get(id);
 					String pass=request.getParameter("pass");
 					String role=request.getParameter("role");
-					
+					user.setRole(Role.valueOf(role));
 					user.setId(id);
 					user.setPass(pass);
-					UserDAO.update(user);
+					UserDAO.update(user,id);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}*/
+			}
 				
 				
 			

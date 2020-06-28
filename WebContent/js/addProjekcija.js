@@ -48,34 +48,28 @@ $(document).ready(function() {
 				
 			}else if (data.loggedInUserRole == 'USER') {
 				document.getElementById('Korisnici').innerHTML = '<a href="korisnik.html?id='+data.loggedInUserName+' ">Korisnik</a>';
-			
+				document.getElementById('Projekcije').innerHTML = '<a href="projekcije.html" >projekcije</a>';
 			}
-				var projekcije = data.projekcije;
-				for (projekcija in projekcije) {
-					var id = window.location.search.slice(1).split('&')[0].split('=')[1];
-					
-					var id1=projekcije[projekcija].id;
-					if (id1 == id){	
-					nazivInput.val(projekcije[projekcija].idFilma);
-					tipInput.val(projekcije[projekcija].tip);
-					salaInput.val(projekcije[projekcija].sala);
-					datumInput.val(projekcije[projekcija].datum);
-					vremeInput.val(projekcije[projekcija].vreme);
-					cenaInput.val(projekcije[projekcija].cena);
-					
-				}
-			}
+				
 				$('#updateSubmit').on('click', function(event) {
+					var nazivInput = $('#nazivInput');
+					var tipInput = $('#tipInput');
+					var salaInput = $('#salaInput');	
+					var datumInput = $('#datumInput');	
+					var vremeInput = $('#vremeInput');	
+					var cenaInput = $('#cenaInput');
+					
 					var naziv = nazivInput.val();
 					var tip = tipInput.val();
 					var sala = salaInput.val();
 					var datum = datumInput.val();
 					var vreme = vremeInput.val();
 					var cena = cenaInput.val();
-					var id = window.location.search.slice(1).split('&')[0].split('=')[1];
-
+					var id = Math.floor(Math.random() * 1000); 
+					var admin=data.loggedInUser;
+					
 					params = {
-						'action': 'update',
+						'action': 'add',
 						'id': id, 
 						'naziv': naziv, 
 						'tip': tip,
@@ -83,6 +77,7 @@ $(document).ready(function() {
 						'datum': datum, 
 						'vreme': vreme, 
 						'cena': cena,
+						'admin':admin,
 						
 						
 					};
