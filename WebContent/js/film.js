@@ -89,6 +89,8 @@ $(document).ready(function() {
 				}
 					else if (data.loggedInUserRole == 'USER'){
 						console.log(data);
+						var id1=filmovi[film].id;
+						if (id1 == id){	
 						$('#adminTable').hide();
 						$('#userTable').show();
 						$('#naziv').text(filmovi[film].naziv);
@@ -100,8 +102,8 @@ $(document).ready(function() {
 						$('#zemlja').text(filmovi[film].zemljaPorekla);
 						$('#godina').text(filmovi[film].godina);
 						$('#opis').text(filmovi[film].opis);
-						document.getElementById("updateSubmit").remove();
-						document.getElementById("deleteSubmit").remove();
+						
+						}
 					}
 			}
 				$('#updateSubmit').on('click', function(event) {

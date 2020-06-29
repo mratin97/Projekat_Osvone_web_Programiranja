@@ -58,6 +58,9 @@ public class KartaServlet extends HttpServlet {
 			name = (name != null? name: "");
 			List<Projekcija> filmovi = ProjekcijaDAO.getAllbyId(name);
 			Map<String, Object> data = new LinkedHashMap<>();
+			Korisnik loggedInUser = UserDAO.get(loggedInUserName);
+			data.put("loggedInUserRole", loggedInUser.getRole());
+			data.put("loggedInUserName", loggedInUser.getId());
 			data.put("filmovi", filmovi);
 
 			request.setAttribute("data", data);

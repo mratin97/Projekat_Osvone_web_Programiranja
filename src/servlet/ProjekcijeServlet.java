@@ -118,12 +118,13 @@ public class ProjekcijeServlet extends HttpServlet {
 				Projekcija projekcija=new Projekcija(id,naziv,tip,sala,datum,vreme,cena,adminId);
 				try {
 					ProjekcijaDAO.add(projekcija);
+					break;
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			
-				break;
+				
 			}
 			case "update": {
 				String id = request.getParameter("id");
@@ -150,11 +151,14 @@ public class ProjekcijeServlet extends HttpServlet {
 				projekcija.setVreme(vreme);
 				projekcija.setCena(cena);
 				projekcija.setAdminId(adminId);
+				projekcija.setId(id);
 				ProjekcijaDAO.update(projekcija);
 				break;
+				
 			}
 			case "delete": {
-				
+				String id = request.getParameter("id");
+				ProjekcijaDAO.delete(id);
 				break;
 			}
 		

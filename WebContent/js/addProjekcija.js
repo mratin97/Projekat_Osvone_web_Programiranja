@@ -51,7 +51,7 @@ $(document).ready(function() {
 				document.getElementById('Projekcije').innerHTML = '<a href="projekcije.html" >projekcije</a>';
 			}
 				
-				$('#updateSubmit').on('click', function(event) {
+				$('#addProjekcija').on('click', function(event) {
 					var nazivInput = $('#nazivInput');
 					var tipInput = $('#tipInput');
 					var salaInput = $('#salaInput');	
@@ -77,7 +77,7 @@ $(document).ready(function() {
 						'datum': datum, 
 						'vreme': vreme, 
 						'cena': cena,
-						'admin':admin,
+						'admin':admin
 						
 						
 					};
@@ -96,6 +96,8 @@ $(document).ready(function() {
 					event.preventDefault();
 					return false;
 				});
+				
+				
 					$('#deleteSubmit').on('click', function(event) {
 						var id = window.location.search.slice(1).split('&')[0].split('=')[1];
 						console.log(id);

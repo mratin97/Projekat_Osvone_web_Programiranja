@@ -82,7 +82,7 @@ $(document).ready(function() {
 						'sala': sala, 
 						'datum': datum, 
 						'vreme': vreme, 
-						'cena': cena,
+						'cena': cena
 						
 						
 					};
@@ -109,7 +109,7 @@ $(document).ready(function() {
 							'id': id, 
 						};
 						console.log(params);
-						$.post('FilmoviServlet', params, function(data) {
+						$.post('ProjekcijeServlet', params, function(data) {
 							if (data.status == 'unauthenticated') {
 								window.location.replace('Login.html');
 								return;

@@ -50,11 +50,7 @@ public class UserUpdServlet extends HttpServlet {
 				request.getRequestDispatcher("./LogoutServlet").forward(request, response);
 				return;
 			}
-			if (loggedInUser.getRole() != Role.ADMIN) {
-
-				request.getRequestDispatcher("./UnauthorizedServlet").forward(request, response);
-				return;
-			}
+			
 		
 		String action = request.getParameter("action");
 		
@@ -69,7 +65,7 @@ public class UserUpdServlet extends HttpServlet {
 					String id=request.getParameter("id");
 					String pass=request.getParameter("pass");
 					String role=request.getParameter("role");
-					
+					user.setRole(Role.valueOf(role));
 					user.setId(id);
 					user.setPass(pass);
 					UserDAO.update(user,id2);
@@ -77,7 +73,7 @@ public class UserUpdServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				break;
+				
 			}
 			case "delete": {
 				String id = request.getParameter("id");

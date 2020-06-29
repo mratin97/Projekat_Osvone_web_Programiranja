@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -63,7 +65,8 @@ String loggedInUserName = (String) request.getSession().getAttribute("loggedInUs
 			Korisnik loggedInUser = UserDAO.get(loggedInUserName);
 			List<Projekcija> projekcije = ProjekcijaDAO.getAll(name);
 			List<Izvestaj> izvestaji = new ArrayList<Izvestaj>();
-			List<Izvestaj> izvestaji12 = new ArrayList<Izvestaj>();
+			Set<Izvestaj> izvestaji112 = new HashSet<Izvestaj>();
+		
 			
 			for(Projekcija projekcija : projekcije) {
 				int countP= ProjekcijaDAO.count(projekcija.getIdFilma());
@@ -71,10 +74,16 @@ String loggedInUserName = (String) request.getSession().getAttribute("loggedInUs
 				int cena= countK * projekcija.getCena();
 				Izvestaj izvestaj= new Izvestaj(projekcija.getIdFilma(),countP,countK,cena);
 				izvestaji.add(izvestaj);
+		
+				
+				
+						
+					
 				
 				
 			
 			}
+		
 			data.put("izvestaji", izvestaji);
 			data.put("loggedInUserRole", loggedInUser.getRole());
 			data.put("loggedInUserName", loggedInUser.getId());

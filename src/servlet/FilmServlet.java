@@ -56,6 +56,9 @@ public class FilmServlet extends HttpServlet {
 				Map<String, Object> data = new LinkedHashMap<>();
 				try {
 					Film film= FilmDAO.get(id);
+					
+					data.put("loggedInUserRole", loggedInUser.getRole());
+					data.put("loggedInUserName", loggedInUser.getId());
 					data.put("film", film);
 					request.setAttribute("data", data);
 				} catch (Exception e) {
@@ -94,7 +97,10 @@ public class FilmServlet extends HttpServlet {
 
 		
 		String action = request.getParameter("action");
-		
+		Map<String, Object> data = new LinkedHashMap<>();
+		data.put("loggedInUserRole", loggedInUser.getRole());
+		data.put("loggedInUserName", loggedInUser.getId());
+		request.setAttribute("data", data);
 		switch (action) {
 			case "add": {
 				String naziv = request.getParameter("naziv");

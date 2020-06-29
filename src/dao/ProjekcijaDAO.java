@@ -224,6 +224,23 @@ public class ProjekcijaDAO {
 			
 		
 		}
+		public static boolean delete(String id) throws Exception {
+			Connection conn = ConnectionManager.getConnection();
+
+			PreparedStatement pstmt = null;
+			try {
+				String query = "DELETE FROM projekcija WHERE id = ?";
+
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, id);
+				System.out.println(pstmt);
+
+				return pstmt.executeUpdate() == 1;
+			} finally {
+				try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+				try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+			}
+		}
 		public static boolean update(Projekcija projekcija) throws Exception {
 			Connection conn = ConnectionManager.getConnection();
 
@@ -235,7 +252,7 @@ public class ProjekcijaDAO {
 				pstmt = conn.prepareStatement(query);
 				int index = 1;
 			
-				pstmt.setString(index++, projekcija.getId());
+				
 				pstmt.setString(index++, projekcija.getIdFilma());
 				pstmt.setString(index++, projekcija.getTip());
 				pstmt.setString(index++, projekcija.getSala());
@@ -243,7 +260,7 @@ public class ProjekcijaDAO {
 				pstmt.setString(index++, projekcija.getVreme());
 				pstmt.setInt(index++, projekcija.getCena());
 				pstmt.setString(index++, projekcija.getAdminId());
-				
+				pstmt.setString(index++, projekcija.getId());
 				System.out.println(pstmt);
 
 				return pstmt.executeUpdate() ==  1;
@@ -252,4 +269,5 @@ public class ProjekcijaDAO {
 				try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();}
 			}
 		}
+		
 }
